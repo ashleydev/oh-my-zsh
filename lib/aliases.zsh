@@ -48,14 +48,14 @@ alias e="$EDITOR"
 alias history='fc -l 1'
 alias get='curl -C - -O'
 alias q='exit'
-alias ssh='ssh -X'
+alias ssh='ssh -XA'
+alias sshl='ssh-add -l'
 alias h='history'
 alias j='jobs -l'
 alias f='fg'
 alias gr='grep -r'
 alias afind='ack -il'
 alias type='type -a'
-# alias ssh='ssh -X'
 alias print-path='echo -e ${PATH//:/\\n}'
 alias t="t --task-dir ~/.tasks --list todo.txt --delete-if-empty"
 
