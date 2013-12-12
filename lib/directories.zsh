@@ -8,11 +8,7 @@ setopt multios              # Write to multiple descriptors.
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias cd..='cd ..'
-alias cd...='cd ../..'
-alias cd....='cd ../../..'
-alias cd.....='cd ../../../..'
-alias cd/='cd /'
+alias .....='cd ../../../..'
 alias -- -='cd -'
 
 alias 1='cd -'
