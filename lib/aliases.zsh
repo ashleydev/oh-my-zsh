@@ -13,7 +13,7 @@ if [[ "$DISABLE_COLOR" != 'true' ]]; then
   else
     export CLICOLOR=1
     export LSCOLORS="exfxcxdxbxegedabagacad"
-    if [[ "`uname`" = Linux ]]; then
+    if [[ "`uname`" = Linux ]] || [[ "`uname`" = *CYGWIN* ]]; then
         alias ls='ls -G -F --color=auto'
     else
         alias ls='ls -G -F'
@@ -34,7 +34,7 @@ alias lr='ls -lhR'           # Recursive ls.
 
 # General
 # ------------------------------------------------------------------------------
-alias rm='nocorrect rm -i'
+alias rm='nocorrect rm'
 alias cp='nocorrect cp -i'
 alias mv='nocorrect mv -i'
 alias ln='nocorrect ln -i'
@@ -106,11 +106,21 @@ if [[ "$TERM" == 'xterm-256color' ]]; then
   fi
 fi
 
+if [[ "$TMUX" != "" ]]; then
+    # For some reason tmux does a `cd -P $PWD` for it's default-path.
+    # my homedir is /u/$USER, but /u is a symlink to /usr/home/nfs, but I want
+    # my PROMPT to show '~' instead of '/usr/home/nfs'.  This accomplishes that.
+    if [[ "${PWD#*$USER}" != "" ]] && [[ "${PWD#*$USER}" != "${PWD}" ]]; then
+        cd ~/${PWD#*$USER/}
+    fi
+fi
+
+
 alias screen="screen $screenrc"
 alias sl="screen $screenrc -list"
 alias sr="screen $screenrc -a -A -U -D -R"
 alias S="screen $screenrc -U -S"
 
 alias tmux="tmux $tmuxconf"
-alias tls="tmux list-sessions"
+alias tl="tmux list-sessions"
 

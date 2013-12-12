@@ -21,6 +21,7 @@ if [[ "$DISABLE_COLOR" != "true" ]]; then
     local _Cerror_="%{$fg[yellow]%}"                 # bad (empty) .git/ directory
     local _Cbranch_new_repo_="%{$fg_bold[default]%}" # branch color of new repo
     local _Cbranch_clean_="%{$fg_no_bold[green]%}"   # branch color when clean
+    local _Cbranch_unmerged_="%{$fg_bold[yellow]%}"  # branch color when clean
     local _Cbranch_dirty_="%{$fg_no_bold[red]%}"     # branch color when dirty
     local _Crebase_="%{$bold_color$fg[yellow]%}"     # rebase info
     local _Cindex_="%{$bold_color$fg[red]%}"         # index info
@@ -30,13 +31,22 @@ if [[ "$DISABLE_COLOR" != "true" ]]; then
     local _Cstash_=""                                # stash state
 
     # PROMPT colors:
-    local _Cuser_root_="%{$fg_bold[yellow]$bg[red]%}"
-    local _Chost_root_="%{$fg[red]%}"
-    local _Cpath_root_="%{$fg_bold[white]%}"
     local _Cuser_="%{$fg_bold[cyan]%}"
     local _Chost_="%{$fg_bold[blue]%}"
     local _Cpath_="%{$fg_bold[white]%}"
     local _Cjobs_="%{$fg[blue]%}"
+
+    if [[ "`uname -a`" = *CYGWIN* ]]; then
+        local _Cuser_="%{$fg[green]%}"
+        local _Chost_="%{$fg_bold[yellow]%}"
+        local _Cpath_=" %{$fg[yellow]%}"
+    fi
+
+    if [[ "`whoami`" = root ]]; then
+        local _Cuser_="%{$fg_bold[yellow]$bg[red]%}"
+        local _Chost_="%{$fg[red]%}"
+        local _Cpath_="%{$fg_bold[white]%}"
+    fi
 
     # RPROMPT colors:
     local _Cdate_="%{$fg[green]%}"
@@ -47,9 +57,9 @@ fi
 #-------------------- PROMPT definition: ----------------------
 #
 
-local user_="%(!.$_Cuser_root_.$_Cuser_)%n$R"
-local host_="%(!.$_Chost_root_.$_Chost_)%m$R"
-local path_="%(!.$_Cpath_root_.$_Cpath_)%~$R"
+local user_="$_Cuser_%n$R"
+local host_="$_Chost_%m$R"
+local path_="$_Cpath_%~$R"
 local jobs_="%(1j.$_Cjobs_%j$R.)"
 
 PROMPT='$user_$host_$path_ $GIT_PROMPT_INFO$jobs_# '
@@ -90,6 +100,7 @@ git_prompt_info ()
   local index_=$GIT_PROMPT_DIRTY_STATE_INDEX_DIRTY
   local untracked_=$GIT_PROMPT_DIRTY_STATE_WORKTREE_UNTRACKED
   local freshy_=$GIT_PROMPT_DIRTY_STATE_FRESH_REPO
+  local unmerged_=$GIT_PROMPT_DIRTY_STATE_INDEX_UNMERGED
 
   if [ -z "$branch_$index_$work_$untracked_" ]; then
     if [ -n "$dir_" ]; then
@@ -118,6 +129,8 @@ git_prompt_info ()
     if [ "$freshy_" = "yes" ]; then
       # this is a fresh repo, nothing here...
       branch_="$_Cbranch_new_repo_$branch_$R"
+    elif [ "$unmerged_" = 'yes' ]; then
+      branch_="$_Cbranch_unmerged_$branch_$R"
     elif [ "$work_" = 'yes' ]; then
       branch_="$_Cbranch_dirty_$branch_$R"
     elif [ "$work_" = 'no' ]; then
