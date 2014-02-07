@@ -9,7 +9,7 @@ function current_branch() {
   echo ${ref#refs/heads/}
 }
 
-# alias g='git'                           ; compdef g=git
+#alias g='git'                                 ; compdef g=git
 alias ga='git add'                            ; compdef _git ga=git-add
 alias gaa='git add --all'                     ; compdef _git gaa=git-add
 
