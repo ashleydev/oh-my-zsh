@@ -18,19 +18,19 @@ alias gca='git commit -v -a'                  ; compdef _git gca=git-commit
 
 alias gs='git status -sb'                     ; compdef _git gs=git-status
 alias gst='git status'                        ; compdef _git gst=git-status
-# for `gsts "<message>"`
+# gsts is for `gsts "<message>"`
 alias gsts='git stash save'                   ; compdef _git gsts=git-stash
 alias gstp='git stash pop'                    ; compdef _git gstp=git-stash
 alias gstl='git stash list'                   ; compdef _git gstl=git-stash
 alias gstll='git stash show -p --stat'        ; compdef _git gstll=git-stash
 
 alias gl='git pull'                           ; compdef _git gl=git-pull
-alias glb='git pull origin $(current_branch)' ; compdef _git glb=git
-alias gup='git fetch && git rebase'           ; compdef _git gup=git-fetch
-alias gf='git fetch'                          ; compdef _git gf=git-fetch
 alias gp='git push'                           ; compdef _git gp=git-push
+alias glb='git pull origin $(current_branch)' ; compdef _git glb=git
 alias gpb='git push origin $(current_branch)' ; compdef _git gpb=git
 alias glpb='git pull origin $(current_branch) && git push origin $(current_branch)'; compdef _git glpb=git
+alias gf='git fetch'                          ; compdef _git gf=git-fetch
+alias gup='git fetch && git rebase'           ; compdef _git gup=git-fetch
 
 alias gcp='git cherry-pick'                   ; compdef _git gcp=git-cherry-pick
 alias gm='git merge'                          ; compdef _git gm=git-merge
