@@ -59,7 +59,7 @@ alias type='type -a'
 alias print-path='echo -e ${PATH//:/\\n}'
 alias t="t --task-dir ~/.tasks --list todo.txt --delete-if-empty"
 
-alias z="vim -o ~/.zshenv $ZSH/lib/aliases.zsh ~/.zshrc"
+alias z="vim -o ~/.zshenv $ZSH/lib/aliases.zsh $ZSH/plugins/git/git-aliases.plugin.zsh ~/.zshrc"
 alias zs='source ~/.zshrc'
 
 if [[ "$EDITOR" = vi* ]]; then
