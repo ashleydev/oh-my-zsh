@@ -64,14 +64,14 @@ local pretty_format_medium='--pretty=format:"%C(yellow)commit %H %C(bold cyan)%d
 %C(green)Date: %cd%C(reset)
 %+s
 %+b"'
-alias gh="git log --date-order --graph $pretty_format_oneline"                               ; compdef _git gh=git-log
-alias ghh="git log --date-order --graph $pretty_format_medium"                               ; compdef _git ghh=git-log
-alias ghhh="git log --date-order --graph --stat $pretty_format_medium"                       ; compdef _git ghhh=git-log
-alias ghhhh="git log --date-order --graph --stat -p --full-diff $pretty_format_medium"       ; compdef _git ghhhh=git-log
-alias gha="git log --all --date-order --graph $pretty_format_oneline"                        ; compdef _git gha=git-log
-alias ghha="git log --all --date-order --graph $pretty_format_medium"                        ; compdef _git ghha=git-log
-alias ghhha="git log --all --date-order --graph --stat $pretty_format_medium"                ; compdef _git ghhha=git-log
-alias ghhhha="git log --all --date-order --graph --stat -p --full-diff $pretty_format_medium"; compdef _git ghhhha=git-log
+alias gh="git log --graph $pretty_format_oneline"                               ; compdef _git gh=git-log
+alias ghh="git log --graph $pretty_format_medium"                               ; compdef _git ghh=git-log
+alias ghhh="git log --graph --stat $pretty_format_medium"                       ; compdef _git ghhh=git-log
+alias ghhhh="git log --graph --stat -p --full-diff $pretty_format_medium"       ; compdef _git ghhhh=git-log
+alias gha="git log --all --graph $pretty_format_oneline"                        ; compdef _git gha=git-log
+alias ghha="git log --all --graph $pretty_format_medium"                        ; compdef _git ghha=git-log
+alias ghhha="git log --all --graph --stat $pretty_format_medium"                ; compdef _git ghhha=git-log
+alias ghhhha="git log --all --graph --stat -p --full-diff $pretty_format_medium"; compdef _git ghhhha=git-log
 
 # Git and svn mix
 alias git-svn-dcommit-push='git svn dcommit && git push github master:svntrunk'
